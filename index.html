@@ -34,13 +34,32 @@
     .like-icon {
         cursor: pointer;
     }
+    .profile-img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      outline: 2px solid #d62976; /* 바깥쪽 테두리 */
+      cursor: pointer; /* 커서: 포인터(손가락 모양) */
+    }
+    .modal {
+      position: fixed; /* 화면에 고정 */
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding-top: 50px; /* 안쪽의 위 여백 */
+      background: rgba(0, 0, 0, 0.7); /* 불투명한 어두운 배경 */
+      text-align: center; /* 이미지 가운데 배치 */
+      display: none; /* 화면에서 안 보이도록 */
+    }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="card-header">
       <!-- 프로필 이미지 -->
-      <img class="profile-img" src="https://images.pexels.com/photos/4197491/pexels-photo-4197491.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+      <img id = "profile-img" class="profile-img" src="https://images.pexels.com/photos/4197491/pexels-photo-4197491.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+      
       <!-- 프로필 닉네임 -->
       <span class="nickname">mini</span>
     </div>
@@ -56,24 +75,56 @@
       <!-- 좋아요 개수 -->
       <span id="count">0</span>
       <span>개</span>
+      
     </div>
 
     <!-- 내용 -->
     <p class="caption">하늘 예쁘다</p>
+
+    <!-- 모달창 -->
+    <div id="modal" class="modal">
+    <img class="modal-img" src="https://i.pinimg.com/736x/8b/e7/04/8be7044585e283ea726e0231c50ed33a.jpg" />
+</div>
   </div>
 <body>
     <script>
-        const likeicon = document.querySelector("#like-icon")
+        const likeIcon = document.querySelector("#like-icon")
         const count = document.querySelector("#count")
-        let result = 0
+        const profileImg = document.querySelector("#profile-img")
+        const modal = document.querySelector("#modal")
+        // let isLiked = false;
 
-        document.querySelector("#like-icon").addEventListener("click",function(){
-            likeicon.textContent = "💖"
-            
-            result = result +1
+        // likeicon.addEventListener("click",function(){
+        //     if(isLiked){
+        //       likeicon.textContent = "🤍"
+        //       count.textContent =  0
+        //     } else {
+        //       likeicon.textContent = "💖"
+              
+        //       count.textContent = +1
+        //     }
+        //   isLiked = !isLiked
+        // })
 
-            count.textContent = result
+        likeIcon.addEventListener("click", function () {
+        if(likeIcon.textContent === "♥️") {
+            likeIcon.textContent = "🤍"
+            count.textContent = Number(count.textContent) - 1;
+        } else {
+            likeIcon.textContent = "♥️"
+            count.textContent = Number(count.textContent) + 1;
+        }
+        });
+
+
+        profileImg.addEventListener("click", function () {
+	        modal.style.display = "block"
         })
+
+        modal.addEventListener("click", function () {
+	        modal.style.display = "none"
+        })
+        
     </script>
 </body>
 </body>
